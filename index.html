@@ -1,0 +1,152 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav id="navbar">
+  <header>CSS Grid</header>
+  <ul>
+  <li><a href="#Introduction" class="nav-link">Introduction</a></li>
+  <li><a href="#Basics_&_Browser_Support" class="nav-link">Basics & Browser Support</a></li>
+  <li><a href="#Important_Terminology" class="nav-link">Important Terminology</a></li>
+  <li><a href="#Grid_Properties" class="nav-link">Grid Properties</a></li>
+  <li><a href="#Fluid_Columns_Snippet" class="nav-link">Fluid Columns Snippet</a></li>
+  <li><a href="#Animation" class="nav-link">Animation</a></li>
+  </ul>
+</nav>
+
+
+<main id="main-doc">
+  <section class="main-section" id="Introduction">
+    <header>Introduction</header>
+    <p>CSS Grid Layout (aka “Grid” or “CSS Grid”), is a two-dimensional grid-based layout system that, compared to any web layout system of the past, completely changes the way we design user interfaces. CSS has always been used to layout our web pages, but it’s never done a very good job of it. First, we used tables, then floats, positioning and inline-block, but all of these methods were essentially hacks and left out a lot of important functionality (vertical centering, for instance). Flexbox is also a very great layout tool, but its one-directional flow has different use cases — and they actually work together quite well! Grid is the very first CSS module created specifically to solve the layout problems we’ve all been hacking our way around for as long as we’ve been making websites. </p>
+<p>
+The intention of this guide is to present the Grid concepts as they exist in the latest version of the specification. So I won’t be covering the out-of-date Internet Explorer syntax (even though you can absolutely use Grid in IE 11) or other historical hacks. </p>
+  </section>
+  <section class="main-section" id="Basics_&_Browser_Support">
+    <header>Basics & Browser Support</header>
+    <p>As of March 2017, most browsers shipped native, unprefixed support for CSS Grid: Chrome (including on Android), Firefox, Safari (including on iOS), and Opera. Internet Explorer 10 and 11 on the other hand support it, but it’s an old implementation with an outdated syntax. The time to build with grid is now! </p>
+<p>
+To get started you have to define a container element as a grid with display: grid, set the column and row sizes with grid-template-columns and grid-template-rows, and then place its child elements into the grid with grid-column and grid-row. Similarly to flexbox, the source order of the grid items doesn’t matter. Your CSS can place them in any order, which makes it super easy to rearrange your grid with media queries. Imagine defining the layout of your entire page, and then completely rearranging it to accommodate a different screen width all with only a couple lines of CSS. Grid is one of the most powerful CSS modules ever introduced.</p>
+   <img src="https://i.ibb.co/23ZmSFH/Browser-Support.png" alt="Browser-Support" border="0">
+  </section>
+
+  <section class="main-section" id="Important_Terminology">
+    <header>Important Terminology</header>
+    <p>Before diving into the concepts of Grid it’s important to understand the terminology. Since the terms involved here are all kinda conceptually similar, it’s easy to confuse them with one another if you don’t first memorize their meanings defined by the Grid specification. But don’t worry, there aren’t many of them.</p>
+    <h2>Grid Container</h2>
+    <p>The element on which display: grid is applied. It’s the direct parent of all the grid items. In this example container is the grid container.</p>
+  <pre><code>&ltdiv class="container" &gt
+    &ltdiv class="item item-1"&gt &lt/div&gt
+    &ltdiv class="item item-2"&gt &lt/div&gt
+    &ltdiv class="item item-3"&gt &lt/div&gt
+  &lt/div&gt </code></pre>
+  <h2>Grid Item</h2>
+  <p>The children (i.e. direct descendants) of the grid container. Here the item elements are grid items, but sub-item isn’t.</p>
+  <pre><code>
+    &ltdiv class="container" &gt
+      &ltdiv class="item"&gt &lt/div&gt
+      &ltdiv class="item"&gt
+        &ltp class="sub-item"&gt &lt/p&gt
+     &lt/div&gt
+      &ltdiv class="item"&gt &lt/div&gt
+    &lt/div&gt
+  </code></pre>
+  </section>
+
+
+  <section class="main-section" id="Grid_Properties">
+    <header>Grid Properties</header>
+      <div class="dropdown">
+  <button class="dropbtn">Dropdown</button>
+  <div class="dropdown-content">
+    <a href="#display">display</a>
+    <a href="#grid-template-columns-rows">grid-template-columns</a>
+    <a href="#grid-template-areas">grid-template-areas</a>
+    <a href="#grid-template-columns-rows">grid-template-rows</a>
+    <a href="#grid-template">grid-template</a>
+    <a href="#grid-column-gap">grid-column-gap</a>
+    <a href="#grid-row-gap">grid-row-gap</a>
+  </div>
+</div>
+<div id="display">
+    <h2>Display</h2>
+    <p>Defines the element as a grid container and establishes a new grid formatting context for its contents.
+
+Values:
+    <ul>
+      <li>grid – generates a block-level grid </li>
+      <li> inline-grid – generates an inline-level grid</li>
+    </ul>
+      </p>
+    <pre><code>.container {
+       display: grid | inline-grid;
+        }
+</code></pre>
+    </div>
+<div id="grid-template-columns-rows"></div>
+  <p>Defines the columns and rows of the grid with a space-separated list of values. The values represent the track size, and the space between them represents the grid line.
+
+Values:</p>
+<ul>
+  <li>&lttrack-size&gt – can be a length, a percentage, or a fraction of the free space in the grid (using the fr unit)</li>
+    <li>&ltline-name&gt – an arbitrary name of your choosing</li>
+</ul>
+<pre><code>.container {
+  grid-template-columns: ...  ...;
+  /* e.g.
+      1fr 1fr
+      minmax(10px, 1fr) 3fr
+      repeat(5, 1fr)
+      50px auto 100px 1fr
+  */</code></pre>
+<pre><code>  grid-template-rows: ... ...;
+  /* e.g.
+      min-content 1fr min-content
+      100px 1fr max-content
+  */
+}</code></pre>
+</section>
+
+
+
+
+
+  <section class="main-section" id="Fluid_Columns_Snippet">
+    <header>Fluid Columns Snippet</header>
+    <p>Fluid width columns that break into more or less columns as space is available, with no media queries!</p>
+    <pre><code> .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        /* This is better for small screens, once min() is better supported */
+        /* grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr)); */
+        gap: 1rem;
+        }
+    </code></pre>
+  </section>
+  <section class="main-section" id="Animation">
+    <header>Animation</header>
+    <p>According to the CSS Grid Layout Module Level 1 specification, there are 5 animatable grid properties:
+<ul>
+   <li> grid-gap, grid-row-gap, grid-column-gap as length, percentage, or calc.</li>
+   <li> grid-template-columns, grid-template-rows as a simple list of length, percentage, or calc, provided the only differences are the values of the length, percentage, or calc components in the list.</li>
+</ul>
+As of this writing, only the animation of (grid-)gap, (grid-)row-gap, (grid-)column-gap is implemented in any of the tested browsers.</p>
+  </section>
+</main>
+<footer id="About">
+      <ul>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <span>Copyright 2021, LM</span>
+    </footer>
+</body>
+</html>
